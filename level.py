@@ -1,4 +1,5 @@
 import pygame
+from entities import Player
 from settings import *
 from os import listdir
 from os.path import isfile, join
@@ -15,8 +16,10 @@ def get_background(theme):
             tiles.append(pos)
     return tiles, image
 
-def draw(window, background, bg_image):
+def draw(window, background, bg_image, player):
     #looping by every single tile, and drawing the bg_image at the tile pos
     for tile in background:
         window.blit(bg_image, tile)
+    
+    player.draw_player(window)
     pygame.display.update()

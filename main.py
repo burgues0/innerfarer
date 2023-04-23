@@ -1,5 +1,6 @@
 import pygame
 import random, math
+from entities import Player
 from settings import *
 from debug import debug
 from level import get_background, draw
@@ -13,17 +14,19 @@ class Game:
         self.clock = pygame.time.Clock()
         self.background, self.bg_image = get_background("orange.png")
 
+        self.player = Player(100,100,32,32)
+
     def run(self):
         #event loop
         isRunning = True
         while isRunning:
             self.clock.tick(FPS)
-
             for event in pygame.event.get():
                 if(event.type == pygame.QUIT):
                     isRunning = False
                     break
-            draw(self.window, self.background, self.bg_image)
+            self.player.player_loop(FPS)
+            draw(self.window, self.background, self.bg_image, self.player)
         pygame.quit()
         quit()
 
